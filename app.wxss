@@ -1,0 +1,4 @@
+/**app.wxss**/
+.ipx-bottom{
+  padding-bottom: 64rpx!important;
+}

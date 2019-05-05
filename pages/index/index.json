@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "navbar":"/components/navbar/navbar",
+    "zhLoading":"/components/component-zxLoading/component-zxLoading"
+  }
+}

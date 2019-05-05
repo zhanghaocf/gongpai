@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<navbar my-property='{{nb}}' />
+<image bindtap='closeTip' class='tip {{hideTip?"hidecls":""}}' src='/images/closable@3x.png' mode="widthFix"></image>
+<view class='operawrap'>
+  <image class='bg' src='/images/bg@3x.png' mode='widthFix'></image>
+</view>
+<view class='bottom {{isIpx?"ipx-bottom":""}}'>
+  <view class='cardwrap'>
+    <block wx:for="{{cardlist}}" wx:key="id">
+      <view class='cardlist {{index===activeIndex?"activeIndex":""}}' data-index="{{index}}" bindtap='selIndex'>
+        <image class='cardImg' src='{{item.background_url}}' mode="aspectFill"></image>
+        <view class='cardrule'>{{item.X}}x{{item.Y}}cm</view>
+      </view>
+    </block>
+    <view class='w36'></view>
+  </view>
+  <button class='btn'>保存工卡</button>
+</view>
+<zhLoading wx:if="{{isLoading}}">模板加载中</zhLoading>
