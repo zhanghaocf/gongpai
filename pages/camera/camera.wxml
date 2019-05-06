@@ -1,0 +1,29 @@
+<navbar my-property='{{nb}}' />
+<camera device-position="{{devicePosition}}"  flash="off" class="camera" wx:if="{{isAuth}}"
+  binderror='handleCameraError'> 
+  <cover-view class='tip-container' >
+    <cover-view>
+        <cover-image hidden="{{devicePosition!=='front'}}" class='line' src="/images/shotsubline@3x.png" mode="widthFix"/>
+        <cover-image hidden="{{devicePosition==='front'}}" class='line' src="/images/shotsubline2@3x.png"  mode="widthFix"/>
+    </cover-view>
+    <cover-view>
+      <cover-view class='control-pannel'>
+        <cover-view class='control-item help' bindtap='selPic'>
+          <cover-image src='/images/image@3x.png' class='control-item-img' id='change-type'></cover-image>
+          <!-- <cover-view class='pinfo'>教程</cover-view> -->
+        </cover-view>
+        <cover-view class='control-item' >
+          <cover-image bindtap='takePhoto' src='/images/iconshot@3x.png' id="shoot-control"></cover-image>
+        </cover-view>  
+        <cover-view class='control-item switch' bindtap='reverseCamera'>
+          <cover-image src='/images/cut-camera@3x.png' class='control-item-right' id='reserve-camera'></cover-image>
+          <!-- <cover-view class='pinfo'>切换</cover-view> -->
+        </cover-view>  
+      </cover-view> 
+    </cover-view>
+  </cover-view>  
+</camera>
+<view wx:if="{{!isAuth}}" class="error-handler">
+  <view>您还没有授权相机权限~</view>
+  <button open-type="openSetting" type="primary" size="mini">打开相机授权</button>
+</view>

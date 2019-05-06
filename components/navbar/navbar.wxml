@@ -7,7 +7,7 @@
     <!-- 0:无返回；1：返回上一级；2：home -->
       <view class='commonHead_left'>
         <image wx:if="{{myProperty.flag==1}}" src='./return.png' class='commonHead_left_back' bindtap='commonHead_left_back'></image>
-        <image wx:if="{{myProperty.flag==2}}" src='./cooperation@3x.png' class='cooperation'></image>
+        <image wx:if="{{myProperty.flag==2}}" src='./cooperation@3x.png' class='cooperation' bindtap='callhelp'></image>
       </view>
       <view class='commonHead_right flex'>
         <view class='commonHead_right_text line1'>{{myProperty.name?myProperty.name:"我是标题"}}</view>

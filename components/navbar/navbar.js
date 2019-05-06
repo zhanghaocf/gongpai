@@ -1,6 +1,10 @@
 // 原文链接https://blog.csdn.net/hangge0111/article/details/85232022 
 Component({
   properties: {
+    isCover:{
+      type:Boolean,
+      value:false
+    },
     myProperty: {
       type: Object,
       value: {
@@ -53,10 +57,9 @@ Component({
       console.log("back")
       wx.navigateBack();
     },
-    commonHead_left_home: function () {
-      console.log("home")
-      wx.reLaunch({
-        url: '/pages/index/index'
+    callhelp: function () {
+      wx.makePhoneCall({
+        phoneNumber:'18114092450'
       })
     }
   }

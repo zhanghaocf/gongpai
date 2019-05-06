@@ -1,6 +1,7 @@
 //app.js
 import wxapi from '/utils/wxapiToPromise.js';
 import httputil from '/utils/http_util.js';
+const busevent = require('/utils/event.js');
 App({
   onLaunch: function () {
     //设置头部导航栏颜色
@@ -78,6 +79,8 @@ App({
     })
   },
   globalData: {
+    uploadUrl:'/app/images',
+    busevent: busevent.event,
     userInfo: null,
     appId: "wx5cb9cbf00ad5ba0e",
     isPhoneX:false,

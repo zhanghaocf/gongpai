@@ -1,0 +1,82 @@
+/* pages/camera/camera.wxss */
+.error-handler {
+  text-align: center;
+  margin-top: 50%;
+}
+
+.error-handler button {
+  margin-top: 20rpx;
+}
+.tips {
+  color: white;
+  background: rgba(0,0,0,0.6);
+  align-self: center;
+  /* margin: 50rpx auto 36rpx; */
+  font-size: 28rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  width: 472rpx;
+  border-radius: 40rpx;
+}
+.line {
+  max-width: 100%;
+  max-height: 70.77vh;
+}
+.control-pannel {
+  display: flex;
+  justify-content: space-around;
+}
+.help{
+  padding-left: 30rpx;
+}
+.switch{
+  padding-right: 30rpx;
+}
+.control-item {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.camera{
+  width:100%;
+  height:calc(100vh - 60px);
+}
+.control-item-img,.control-item-right {
+  width: 64rpx;
+  height: 64rpx;
+}
+#shoot-control {
+  width:144rpx;
+  height:144rpx;
+}
+.infowrap{
+  overflow: hidden;
+  margin-bottom: 10rpx;
+}
+.control-item-info{
+  width:244rpx;
+  height:60rpx;
+  float:right;
+  margin-right: 6rpx;
+}
+#shoot-control cover-view {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.pinfo{
+  flex-basis: 100%;
+  color:white;
+  text-align: center;
+  font-size: 24rpx;
+  margin-top: 16rpx;
+}
+.tip-container{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+}

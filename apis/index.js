@@ -9,7 +9,18 @@ function getModules(){
     res(result);
   })
 }
+
+function brands(data){
+  return new Promise((res,rej)=>{
+    var result = {
+      code:201
+    }
+    res(result);
+  })
+}
+
 //获取模板接口
 module.exports = {
-  getModules: getModules
+  getModules: getModules,
+  brands: brands
 }

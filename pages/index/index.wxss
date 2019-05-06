@@ -8,6 +8,7 @@ page{
   height:0;
   margin: 6rpx 0 0 50rpx;
   position:absolute;
+  z-index: 2;
 }
 .hidecls{
   opacity: 0;
@@ -17,7 +18,7 @@ page{
 }
 .bg{
   width:100%;
-  height:0;
+  height:866rpx   ;
   display: block;
 }
 .bottom{
@@ -61,7 +62,6 @@ page{
 }
 .cardlist{
   width:160rpx;
-  height:240rpx;
   border-radius: 8rpx;
   box-sizing: border-box;
   overflow: hidden;
@@ -81,7 +81,111 @@ page{
   color:#191F25;
   text-align: center;
   font-weight: bold;
+  margin:6rpx 0;
 }
 .activeIndex{
   border:2rpx solid #2853FF;
+}
+.nopic{
+  width:100%;
+  height:0;
+  display: block;
+  border-radius: 18rpx;
+}
+.photowrap{
+  width:558rpx;
+  position:absolute;
+  left:50%;
+  top:108rpx;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+}
+.operawrap{
+  position:relative;
+}
+.dimg{
+  width:100%;
+  height:100%;
+}
+.defaultorpic{
+  position:absolute;
+}
+.fields{
+  position:absolute;
+  box-sizing: border-box;
+}
+.tipfont{
+  width:100%;
+  position:absolute;
+  text-align: center;
+  font-size: 12px;
+  color:#fff;
+  bottom:16rpx;
+}
+.ipt{
+  width:100%;
+  height:100%;
+}
+.focusCls{
+  border:2rpx dashed #FF583E;
+  background-color:rgba(60,60,60,0.4);
+}
+.editbtn{
+  position:absolute;
+  right:0;
+  bottom:0;
+  width:0.8rem;
+  height:0.8rem;
+}
+.canBtn{
+  background-color:#2853FF;
+}
+.yulan{
+  font-size: 26rpx;
+  color:#9B9B9B;
+  text-align: center;
+  height:36rpx;
+  line-height: 36rpx;
+}
+.xiaoguo::before,.xiaoguo::after{
+  content:'';
+  display: inline-block;
+  width:60rpx;
+  height:2rpx;
+  background-color:#9B9B9B;
+  vertical-align: middle;
+  font-size: 0;
+}
+.xiaoguo::before{
+  margin-right: 10rpx;
+}
+.xiaoguo::after{
+  margin-left: 10rpx;
+}
+.btngroup{
+  background-color:white;
+  box-sizing: border-box;
+  padding:16rpx 32rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  margin-top: 102rpx;
+}
+.gbtn{
+  flex-shrink: 0;
+  width:336rpx;
+  height:88rpx;
+  text-align: center;
+  line-height: 88rpx;
+  font-size: 34rpx;
+  border-radius: 6rpx;
+  box-sizing: border-box;
+}
+.gbtn:first-child{
+  border:2rpx solid  #E3E4E4;
+  color:#7E8185
+}
+.gbtn:last-child{
+  background-color: #2853FF;
+  color:#FFFFFF;
 }
