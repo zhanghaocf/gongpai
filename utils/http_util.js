@@ -43,7 +43,14 @@ function getPromise(url,app) {
       header: requestHead,
       success: function (result) {
         var data = result.data;
-        res(data);
+        if (result.statusCode === 200) {
+          res(data);
+        } else {
+          wx.showToast({
+            title: data.message,
+            icon: 'none'
+          })
+        }
       },
       fail: function () {
         rej('发生错误');
@@ -59,7 +66,14 @@ function getPromisenoauth(url) {
       method: 'GET',
       success: function (result) {
         var data = result.data;
-        res(data);
+        if (result.statusCode === 200){
+          res(data);
+        }else{
+          wx.showToast({
+            title: data.message,
+            icon: 'none'
+          })
+        }
       },
       fail: function () {
         rej('发生错误');
@@ -78,7 +92,14 @@ function postpromise(url, data, app) {
       header: requestHead,
       success: function (result) {
         var data = result.data;
-        res(data)
+        if (result.statusCode === 201) {
+          res(data);
+        } else {
+          wx.showToast({
+            title: data.message,
+            icon: 'none'
+          })
+        }
       },
       fail: function () {
         rej('发生错误')
@@ -95,7 +116,14 @@ function postpromisenoauth(url, data) {
       data: data,
       success: function (result) {
         var data = result.data;
-        res(data);
+        if (result.statusCode === 201) {
+          res(data);
+        } else {
+          wx.showToast({
+            title: data.message,
+            icon: 'none'
+          })
+        }
       },
       fail: function () {
         rej('发生错误')

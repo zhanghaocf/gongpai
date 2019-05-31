@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    devicePosition: 'front',
+    devicePosition: 'back',
     isAuth:true,
     nb: {
       "bg_color": "#ffffff",
@@ -38,7 +38,6 @@ Page({
   onShow: function () {
     wxapi.proxy.getSetting().then(res=>{
       let bol = res.authSetting['scope.camera']!==false;
-      console.log(bol);
       this.setData({
         isAuth:bol
       })
@@ -89,40 +88,42 @@ Page({
     })
   },
   uploadFile(filePath){
-    let obj={
-      pic_url: filePath,
-      image_key:'fk'
-    }
-    gd.busevent.emit('setPhoto', obj);
-    wx.navigateBack({})
-    //TODO：等接口
-    // wx.showLoading({
-    //   title: '制作图片中',
-    //   mask:true
-    // })
-    // let options={
-    //   url: gd.uploadUrl,
-    //   filePath: filePath,
-    //   name:'pic_file',
-    //   formData: {
-    //     mould_id: moduleId
-    //   }
+    // let obj={
+    //   pic_url: filePath,
+    //   pic_key:'fk'
     // }
-    // wxapi.proxy.uploadFile(options).then(res=>{
-    //   if(res.code==201){
-    //     wxapi.proxy.showToast({
-    //       title:'制作成功'
-    //     }).then(result=>{
-    //       gd.busevent.emit('setPhoto', res);
-    //       wx.navigateBack({})
-    //     })
-    //   }else{
-    //     wx.showToast({
-    //       title:res.message,
-    //       icon:'none'
-    //     })
-    //   }
-    // })
+    // gd.busevent.emit('setPhoto', obj);
+    // wx.navigateBack({})
+    //TODO：等接口
+    wx.showLoading({
+      title: '制作图片中',
+      mask:true
+    })
+    let options={
+      url: gd.uploadUrl,
+      filePath: filePath,
+      name:'pic_file',
+      formData: {
+        mould_id: moduleId
+      }
+    }
+    wxapi.proxy.uploadFile(options).then(res=>{
+      //console.log(res);
+      let resData = JSON.parse(res.data);
+      if(res.statusCode==201){
+        wxapi.proxy.showToast({
+          title:'制作成功'
+        }).then(result=>{
+          gd.busevent.emit('setPhoto', resData);
+          wx.navigateBack({})
+        })
+      }else{
+        wx.showToast({
+          title: resData.message,
+          icon:'none'
+        })
+      }
+    })
   },
   handleCameraError(e) {
     console.log(e)

@@ -1,30 +1,35 @@
 <!--index.wxml-->
 <navbar my-property='{{nb}}' />
-<image bindtap='closeTip' class='tip {{hideTip?"hidecls":""}}' src='/images/closable@3x.png' mode="widthFix"></image>
- <form bindsubmit="formSubmit" bindtap='focusblurFn'>
-  <view class='operawrap'>
-    <image class='bg' src='/images/bg@3x.png' mode='widthFix'></image>
+<view class='h67'></view>
+<image bindtap='closeTip' class='tip {{hideTip?"hidecls":""}} {{isIpx?"mt20":""}}' src='/images/closable@3x.png' mode="widthFix"></image>
+ <form bindsubmit="formSubmit" bindtap="focusblurFnAZ">
+  <view class='operawrap {{isIpx?"mt20":""}}'>
+    <image hidden='{{isEdit}}' class='bg' src='/images/shadow@3x.png' mode='widthFix'></image>
+    <image hidden='{{!isEdit}}' class='bg' src='/images/bg@3x.png' mode='widthFix'></image>
+    <image hidden='{{isEdit}}' class='bg32' src='/images/bg@3x2.png'></image>
     <view class='photowrap'>
-      <image class='nopic' src='{{activeCard.no_data_background_url}}' mode='widthFix'></image>
-      <view catchtap='takephoto' class='defaultorpic' style="width:{{activeCard.pixel_width*bili}}px;height:{{activeCard.pixel_height*bili}}px;left:{{activeCard.X*bili}}px;top:{{activeCard.Y*bili}}px">
-        <block wx:if="{{!filePath.pic_url}}">
-          <image class='dimg' src='{{activeCard.basic_pic}}'></image>
-          <view class="tipfont">点击拍摄证件照</view>
-        </block>
-        <image wx:else class='dimg' src='{{filePath.pic_url}}' mode="aspectFill"></image>
+    <block wx:for="{{cardlist}}" wx:key="id">
+      <view hidden="{{activeIndex!=index}}">
+        <image class='nopic' src='{{item.no_data_background_url}}' mode='widthFix'></image>
+        <view catchtap='takephoto' class='defaultorpic' style="width:{{item.pixel_width*bili}}px;height:{{item.pixel_height*bili}}px;left:{{item.x*bili}}px;top:{{item.y*bili}}px">
+          <block wx:if="{{!moduleFile[item.id]}}">
+            <image class='dimg' src='{{item.basic_pic_url}}'></image>
+            <view class="tipfont">点击拍摄证件照</view>
+          </block>
+          <image wx:else class='dimg' src='{{moduleFile[item.id].pic_url}}' mode="aspectFill"></image>
+        </view>
       </view>
-      <block wx:for="{{cardlist}}" wx:key="id">
-        <view wx:for="{{item.field}}" wx:for-item="carditem" wx:for-index="idx" hidden="{{activeIndex!=index}}" wx:key="name">
-          <view data-focusindex="{{idx}}" class='fields {{focusActive==idx?"focusCls":""}}'  style="width:{{carditem.pixel_width*bili}}px;left:{{carditem.X*bili}}px;top:{{carditem.Y*bili}}px;font-size:{{carditem.font_size*bili}}px;color:{{carditem.color}}">
-            <input disabled='{{!isEdit}}' data-focusindex="{{idx}}" placeholder='{{carditem.default}}' placeholder-style="color:{{carditem.color}}" class='ipt' name="{{carditem.name}}"/>
+        <view wx:for="{{item.fields}}" wx:for-item="carditem" wx:for-index="idx" hidden="{{activeIndex !==index}}" wx:key="name">
+          <view data-focusindex="{{idx}}" class='fields {{focusActive==idx?"focusCls":""}}'  style="width:{{carditem.pixel_width*bili}}px;height:{{carditem.pixel_height*bili}}px;left:{{carditem.x*bili}}px;top:{{(carditem.y)*bili}}px;font-size:{{carditem.font_size*bili}}px;color:{{carditem.color}}">
+            <input bindfocus="focusblurFnIOS" disabled='{{!isEdit}}' data-focusindex="{{idx}}" placeholder='{{carditem.default}}' placeholder-style="color:{{item.placeholder_color}}" class='ipt {{item.is_centered?"txtcenter":""}}' name="{{activeIndex==index?carditem.name:''}}"/>
             <image hidden="{{focusActive!=idx}}" class='editbtn' src='/images/edit@3x.png'></image>
           </view>
         </view>
       </block>
     </view>
   </view>
-    <view hidden="{{!!isEdit}}" class="yulan"><text class='xiaoguo'>制作效果预览</text></view>
-    <view hidden="{{!!isEdit}}" class='btngroup'>
+    <view hidden="{{!!isEdit}}" class="yulan {{isIpx?'mb155':''}}"><text class='xiaoguo'>制作效果预览</text></view>
+    <view hidden="{{!!isEdit}}" class='btngroup {{isIpx?"b35":""}}'>
       <view class='gbtn' bindtap='canedit'>重新编辑</view>
       <view class='gbtn' bindtap='makePhoto'>确认</view>
     </view>
@@ -33,12 +38,15 @@
       <block wx:for="{{cardlist}}" wx:key="id">
         <view class='cardlist {{index===activeIndex?"activeIndex":""}}' data-index="{{index}}" bindtap='selIndex'>
           <image class='cardImg' src='{{item.background_url}}' mode="aspectFill"></image>
-          <view class='cardrule'>{{item.actual_width}}x{{item.actual_height}}cm</view>
+          <view class='cardrule'>{{item.width}}x{{item.height}}cm</view>
         </view>
       </block>
       <view class='w36'></view>
     </view>
-    <button form-type="submit" class='btn {{!filePath.pic_url?"":"canBtn"}}'>保存工卡</button>
+    <button form-type="submit" class='btn {{!moduleFile[activeCard.id]?"":"canBtn"}}'>保存工卡</button>
   </view>
 </form>
 <zhLoading wx:if="{{isLoading}}">模板加载中</zhLoading>
+<view hidden="{{!modalShow}}">
+  <modal bindclosemodal="closeModal"></modal>
+</view>

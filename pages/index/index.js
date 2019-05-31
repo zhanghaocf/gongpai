@@ -7,6 +7,7 @@ const wxapi = require('../../utils/wxapiToPromise.js');
 let infodata={};
 Page({
   data: {
+   modalShow: false,
    isEdit:true,
    isIpx:false,
    isLoading:false,
@@ -22,10 +23,11 @@ Page({
    cardlist:[],
    activeCard:null,
    bili:1,
-   filePath:{
-     pic_url:'',
-     image_key:''
-   }
+  //  filePath:{
+  //    pic_url:'',
+  //    pic_key:''
+  //  },
+   moduleFile:{}
   },
   takephoto(){
     let isEdit = this.data.isEdit;
@@ -42,25 +44,32 @@ Page({
     })
   },
   setPhoto(picObj){
-    console.log(picObj);
+    let td = this.data;
+    let moduleFile = td.moduleFile;
+    moduleFile[td.activeCard.id]=picObj;
+    console.log(moduleFile)
     this.setData({
-      filePath: picObj
+      moduleFile
     })
   },
   onLoad: function () {
-    this.setData({
-      isIpx: gd.isPhoneX
-    })
     this.getSystem();
-   api.getModules().then(res=>{
+    api.getModules(this,app).then(res=>{
      console.log(res);
      let activeCard = res[0];
      this.setData({
        cardlist:res,
-       activeCard
+       activeCard,
+       isLoading:false,
+       isIpx: gd.isPhoneX
      })
    });
     this.threeclose();
+  },
+  closeModal() {
+    this.setData({
+      modalShow: false
+    })
   },
   //获取手机宽度比
   getSystem(){
@@ -92,15 +101,17 @@ Page({
     if(index===currentIndex){
       return;
     }
-    let activeCard = cardlist[index];
+   let activeCard = cardlist[index];
    this.setData({
      activeIndex:index,
      activeCard
    })
   },
   formSubmit(e){
-    let filepath = this.data.filePath;
-    if (!filepath.pic_url){
+    let td = this.data;
+    let moduleFile = td.moduleFile;
+    let moduleId = td.activeCard.id;
+    if (!moduleFile[moduleId]){
       return;
     }
     infodata={};
@@ -108,7 +119,7 @@ Page({
     let message='';
     for(let key in obj){
       if (!obj[key]){
-        message = `请把${key}信息输入完整`;
+        message = `请把信息输入完整`;
         break;
       }
     }
@@ -124,6 +135,18 @@ Page({
       isEdit:false,
       focusActive:-1
     })
+  },
+  focusblurFnAZ(e){
+    if (gd.isIOS){
+      return;
+    }
+    this.focusblurFn(e);
+  },
+  focusblurFnIOS(e){
+    if (!gd.isIOS) {
+      return;
+    }
+    this.focusblurFn(e);
   },
   focusblurFn(e){
     let isEdit = this.data.isEdit;
@@ -146,24 +169,34 @@ Page({
   },
   makePhoto(){
     let data = this.data;
-    let filePath = data.filePath;
     let moduleId = data.activeCard.id;
+    let filePath = data.moduleFile[moduleId];
     let postdata={
-      "image_key": filePath.image_key,
+      "image_key": filePath.pic_key,
       "mould_id": moduleId,
       "fields": infodata
     }
     console.log(postdata);
-    api.brands(postdata).then(res=>{
-      if(res.code==201){
+    api.brands(postdata,this,app).then(res=>{
         wxapi.proxy.showToast({
           title: '发送成功',
         }).then(res=>{
           this.setData({
-            isEdit:true
+            isEdit:true,
+            isLoading: false,
+            modalShow: true
           })
         })
-      }
+    }).catch(() => {
+      this.setData({
+        isLoading:false
+      })
     })
+  },
+  onShareAppMessage(res) {
+    return {
+      title: '工牌信息采集系统,18秒收集员工工牌信息',
+      imageUrl: '/images/share.png'
+    }
   }
 })

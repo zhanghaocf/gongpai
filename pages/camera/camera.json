@@ -1,6 +1,5 @@
 {
-  "usingComponents": {
-    "navbar": "/components/navbar/navbar",
-    "zhLoading": "/components/component-zxLoading/component-zxLoading"
-  }
+  "usingComponents": {},
+  "navigationStyle": "default",
+  "navigationBarTitleText":"工牌办理中心"
 }

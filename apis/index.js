@@ -1,22 +1,13 @@
-var Mock = require('../mock/mock.js');
 var httpUrl = require('../utils/http_util.js');
-var domainName = "";
+var domainName = "https://ecard.prd.shangchao.la";
 
 //获取模板接口
-function getModules(){
-  return new Promise((res,rej)=>{
-    var result = Mock.getModules();
-    res(result);
-  })
+function getModules(page,app){
+  return httpUrl.Get(`${domainName}/app/moulds`,true,page,app,false)
 }
 
-function brands(data){
-  return new Promise((res,rej)=>{
-    var result = {
-      code:201
-    }
-    res(result);
-  })
+function brands(data,page,app){
+  return httpUrl.Post(`${domainName}/app/brands`,data,true,page,app,false);
 }
 
 //获取模板接口

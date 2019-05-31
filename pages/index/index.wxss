@@ -3,11 +3,17 @@ page{
   min-height: 100%;
   background-color: #F5F7FA;
 }
+.txtcenter {
+  text-align: center;
+}
+.h67{
+  height:67px;
+}
 .tip{
   width:624rpx;
   height:0;
   margin: 6rpx 0 0 50rpx;
-  position:absolute;
+  position:fixed;
   z-index: 2;
 }
 .hidecls{
@@ -103,6 +109,12 @@ page{
 .operawrap{
   position:relative;
 }
+.mt20 {
+  margin-top:25px;
+}
+.ipx-bottom{
+  margin-bottom: 34px;
+}
 .dimg{
   width:100%;
   height:100%;
@@ -124,7 +136,8 @@ page{
 }
 .ipt{
   width:100%;
-  height:100%;
+  height:100%!important;
+  min-height: initial!important;
 }
 .focusCls{
   border:2rpx dashed #FF583E;
@@ -146,6 +159,7 @@ page{
   text-align: center;
   height:36rpx;
   line-height: 36rpx;
+  margin-bottom: 120rpx;
 }
 .xiaoguo::before,.xiaoguo::after{
   content:'';
@@ -162,6 +176,21 @@ page{
 .xiaoguo::after{
   margin-left: 10rpx;
 }
+.b35{
+  padding-bottom:35px!important;
+}
+.mb155{
+  margin-bottom: 155px;
+}
+.bg32{
+  position:absolute;
+  width:635rpx;
+  height:895rpx;
+  top:0;
+  left:50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+}
 .btngroup{
   background-color:white;
   box-sizing: border-box;
@@ -169,7 +198,9 @@ page{
   display: flex;
   display: -webkit-flex;
   justify-content: space-between;
-  margin-top: 102rpx;
+  position:fixed;
+  bottom:0;
+  width:100%;
 }
 .gbtn{
   flex-shrink: 0;

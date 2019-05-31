@@ -20,10 +20,11 @@ App({
   },
   //判断是否是ipx
   isIpx(){
-    var model = wx.getSystemInfoSync().model;
+    let {model, platform} = wx.getSystemInfoSync();
     var reg = /iphone10|iPhone X/i;
     var isPhoneX = reg.test(model);
     this.globalData.isPhoneX = isPhoneX;
+    this.globalData.isIOS = platform === "ios";
   },
   doLogin: function () {
     return wxapi.proxy.login().then(res => {
@@ -79,11 +80,12 @@ App({
     })
   },
   globalData: {
-    uploadUrl:'/app/images',
+    uploadUrl:'https://ecard.prd.shangchao.la/app/images',
     busevent: busevent.event,
     userInfo: null,
     appId: "wx5cb9cbf00ad5ba0e",
     isPhoneX:false,
+    isIOS:false,
     requestHead:{
       'ID': '',
       'user-key': ''

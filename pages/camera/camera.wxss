@@ -21,11 +21,16 @@
 }
 .line {
   max-width: 100%;
-  max-height: 70.77vh;
+  /* max-height: 70.77vh; */
+}
+.linewrap{
+  flex-shrink: 0;
 }
 .control-pannel {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 30px;
+  flex-shrink: 0;
 }
 .help{
   padding-left: 30rpx;
@@ -42,7 +47,7 @@
 }
 .camera{
   width:100%;
-  height:calc(100vh - 60px);
+  height:100vh;
 }
 .control-item-img,.control-item-right {
   width: 64rpx;

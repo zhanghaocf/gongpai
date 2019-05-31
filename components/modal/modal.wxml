@@ -1,0 +1,11 @@
+<view class="modal" bindtap='closeFn'>
+  <view class='modalwrap' catchtap='preventfn'>
+    <image src='/images/Copy@3x.png' mode="widthFix" class='topimg'></image>
+    <view class='info'>提交后，登录后台体验管理功能</view>
+    <view class='datacls'>网址：<text class='tiyan'>{{net}}</text></view>
+    <view class='datacls'>账号：<text class='tiyan'>{{account}}</text></view>
+    <view class='datacls'>密码：<text class='tiyan'>{{pass}}</text></view>
+    <view class='tishi'>（体验版信息公开，咨询请点左上角）</view>
+    <view bindtap='fuzhi' class='btn' hover-class='hovercls' hover-stay-time='50'>复制登录信息</view>
+  </view>
+</view>
